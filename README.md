@@ -9,6 +9,13 @@
 
 </p>
 
+
+
+
+## Project Overview
+
+The detection platform uses AWS native services to collect, analyze, and alert on security-relevant events. CloudTrail captures all API activity and stores logs in Amazon S3 for long-term retention while simultaneously streaming events to CloudWatch Logs for near real-time analysis. CloudWatch metric filters and GuardDuty findings are used to detect suspicious behavior and trigger alerts via Amazon SNS. AWS Lambda enriches alerts with contextual information to support faster investigations.
+
 ### 📘 Table of Contents
  1. Project Overview   
  2. Detection Goals
@@ -22,12 +29,6 @@
  5. Detection Use Cases
  6. Testing & Validation
  7. Lessons Learned 
-
-
-## Architecture Overview
-
-The detection platform uses AWS native services to collect, analyze, and alert on security-relevant events. CloudTrail captures all API activity and stores logs in Amazon S3 for long-term retention while simultaneously streaming events to CloudWatch Logs for near real-time analysis. CloudWatch metric filters and GuardDuty findings are used to detect suspicious behavior and trigger alerts via Amazon SNS. AWS Lambda enriches alerts with contextual information to support faster investigations.
-
 
 
 
@@ -44,6 +45,28 @@ The purpose of this detection platform is to identify and alert on high-risk sec
 4. Sensitive Data Access (S3)
 
 5. Known Malicious Activity
+
+
+
+
+### 🏗️ Architecture Overview
+
+📌 Purpose of the Architecture
+
+The architecture is designed to:
+ - Collect security telemetry from AWS
+ - Analyze activity for suspicious behavior
+ - Alert when risky actions occur
+ -  Support investigation through centralized logs
+
+
+## 🏗️ Implementation – Step 1: CloudTrail (All Regions)
+
+🎯 Objective
+
+Enable all-region CloudTrail to capture all AWS API activity for security monitoring, threat detection, and investigation.
+
+- Create a secure S3 Bucket
 
 
 
