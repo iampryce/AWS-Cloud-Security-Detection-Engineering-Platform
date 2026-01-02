@@ -32,7 +32,7 @@ The purpose of this detection platform is to identify and alert on high-risk sec
 
 
 ### 📘 Table of Contents
- 1. Project Overview
+ 1. Project Overview   
  2. Detection Goals
  3. Architecture Overview
  4. Implementation
