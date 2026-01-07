@@ -1,4 +1,4 @@
-<img width="779" height="1280" alt="image" src="https://github.com/user-attachments/assets/2e8b208d-f784-4046-8942-8b2efba8a7e4" /><p align="center">
+<p align="center">
   <img src="https://miro.medium.com/v2/resize:fit:1358/format:webp/0*3HztNM5KW7v9V_v8" width="150">
 </p>
 
