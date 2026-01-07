@@ -1,4 +1,4 @@
-<p align="center">
+<img width="779" height="1280" alt="image" src="https://github.com/user-attachments/assets/2e8b208d-f784-4046-8942-8b2efba8a7e4" /><p align="center">
   <img src="https://miro.medium.com/v2/resize:fit:1358/format:webp/0*3HztNM5KW7v9V_v8" width="150">
 </p>
 
@@ -74,7 +74,7 @@ Detection is useless if the account itself is insecure.
 <img width="1350" height="637" alt="image" src="https://github.com/user-attachments/assets/f9e9f6ab-7db3-4202-8d30-ddb4faa2bad2" />
 
 
-## 🗄️  Implementation  Step 1– Secure S3 Log Storage (Foundation Step)
+## 🗄️  Implementation - Secure S3 Log Storage (Foundation Step)
 
 🎯 Objective
 
@@ -96,7 +96,7 @@ https://github.com/user-attachments/assets/21a5c026-ba51-45d3-8bdd-a7e637847e3c
 
 
 
-## 🏗️ Implementation – Step 2: CloudTrail (All Regions)
+## 🏗️ Implementation - CloudTrail (All Regions)
 
 🎯 Objective
 
@@ -130,7 +130,7 @@ _🔹Cloudtrail Created_
 
 
 
-## 🔄 Implementation – Step 3:  CloudWatch Logs Integration
+## 🔄 Implementation - CloudWatch Logs Integration
 
 🎯 Objective
 Stream CloudTrail logs into CloudWatch Logs to enable near real-time security detection and alerting.
@@ -154,7 +154,7 @@ https://screenrec.com/share/ayufk59jTE
 
 <img width="1342" height="618" alt="image" src="https://github.com/user-attachments/assets/ab354300-c878-43ad-8b59-d8bad23654e9" /> <br/>
 
-## 🔍 Implementation – Step 4: Detection Rule 1: Root Account Usage
+## 🔍 Implementation - Detection Rule 1: Root Account Usage
 
 🎯 Objective
 
@@ -216,7 +216,7 @@ _🔹step(3)_
 <img width="1554" height="737" alt="image" src="https://github.com/user-attachments/assets/63a92464-23b7-482d-99b9-6a0d4e3243aa" />
 
 
-###  Safe Test for Detection Rule: Root Account Usage
+### 🔍 Safe Test for Detection Rule: Root Account Usage
 
 🎯 Objective
 
@@ -238,12 +238,12 @@ I signed in into the root user and performed a read only root activity(signed in
 
 
 
-## 🔍 Implementation Step 5, Detection Rule 2: Unauthorized API Calls (AccessDenied)
+## 🔍 Implementation - Detection Rule 2: Unauthorized API Calls (AccessDenied)
 
 🎯 Objective:
 Detect unauthorized AWS API calls using CloudTrail logs.
 
-_🔹step(1)_
+_🔹step(1)_   
 
  - Created metric filter
  -  Filter pattern: { $.errorCode = "AccessDenied" }
@@ -252,21 +252,100 @@ _🔹step(1)_
  -   Metric value: 1
 <img width="1345" height="662" alt="image" src="https://github.com/user-attachments/assets/3645a63d-d56d-43c8-861a-61bd17ed6486" />
 
-<img width="582" height="665" alt="image" src="https://github.com/user-attachments/assets/646c6219-1cd4-44a2-bc7c-25410d798d9c" />
-
-
+<img width="582" height="665" alt="image" src="https://github.com/user-attachments/assets/646c6219-1cd4-44a2-bc7c-25410d798d9c" /> <br/>
 
 
  
  _🔹step(2)_
- -  Created CloudWatch alarm for the filter we i made.
+ 
+ -  Created CloudWatch alarm for the filter  i made.
    - Threshold: AccessDeniedCount >= 3 in 5 minutes  (Access denied 3 times in 5 minues) 
    - Notification: SNS topic security-alerts
 
 ### 📌 What this does
-it detect and alert on unauthorized API activity using CloudTrail, CloudWatch Logs, and SNS. <br/> 
+it detects and alert on unauthorized API activity using CloudTrail, CloudWatch Logs, and SNS. <br/> 
 
 <img width="1350" height="675" alt="image" src="https://github.com/user-attachments/assets/109959cf-59f9-4d3c-8873-0d6f80908273" />
-<img width="1352" height="567" alt="image" src="https://github.com/user-attachments/assets/7218121f-5f92-4cc6-b2e0-5a972dfb4d87" />
+<img width="1352" height="567" alt="image" src="https://github.com/user-attachments/assets/7218121f-5f92-4cc6-b2e0-5a972dfb4d87" />  <br/>
 
+### 🔍 Safe Test for Detection Rule 2 ( AccessDenied Test)
+
+🎯 Objective
+- Generated Acess-Denied Event (i launched an Ec2 instance)
+- Met Alarm threshold ( Repeated same action 3 times)
+- Confirm Metric increment
+- Confirm Alarm State
+- Confirm Eamil Notification
+
+_🔹step(1)_   
+  Generated Acess-Denied Event by trying to lunch services i am not allowed to use. 
+  Note: I created a new IAM user and attached on ReadOnly permission in other to simulate this event trigger.
+
+  <img width="1357" height="615" alt="image" src="https://github.com/user-attachments/assets/ade613aa-346b-4a0c-b1c5-e210a4567c29" />
+  <img width="1352" height="628" alt="image" src="https://github.com/user-attachments/assets/0933b5c9-037e-4fb1-bf10-71a3744f254c" />
+  <img width="1334" height="510" alt="image" src="https://github.com/user-attachments/assets/f11d9cae-9ba9-4c4d-ba7a-0dbb847983e4" />
+
+ 
+ 
+### Confirmd Metric increment ✅
+ 
+<img width="1330" height="536" alt="image" src="https://github.com/user-attachments/assets/31696bbb-3ed0-4eda-a661-925b5d07f89e" /> <br/>
+
+### Confirmed Alarm State ✅
+
+<img width="978" height="620" alt="image" src="https://github.com/user-attachments/assets/d399faf1-cbf8-490b-8e63-a8c7eaec9193" />
+
+### Confirmed Eamil Notification  ✅
+
+ <img width="779" height="1280" alt="image" src="https://github.com/user-attachments/assets/2b690494-3da9-4248-aed3-02d9547404a2" />
+
+
+## 🔍 Implementation - Detection Rule 3: IAM Policy Changes (Privilege Escalation)
+
+🎯 Objective
+
+Detect changes to IAM policies or role attachments that could indicate privilege escalation attempts.
+
+### 📌 Why This Matters
+
+Attackers often escalate privileges by attaching policies or modifying roles, Detecting these changes quickly is critical for SOC visibility.
+
+ _🔹step(1)_  
+
+- Created Metric filter
+- Filter pattern: 
+ { ($.eventName = "AttachUserPolicy") ||
+  ($.eventName = "AttachRolePolicy") ||
+  ($.eventName = "PutUserPolicy") ||
+  ($.eventName = "PutRolePolicy") }
+  - Metric namespace: SecurityDetections
+  - Metric name: IAMPolicyChangeCount
+ 
+    <img width="1351" height="652" alt="image" src="https://github.com/user-attachments/assets/0cd874cd-4040-42c5-9d0d-68ca990982ce" />
+
+ 
+     _🔹step(2)_
+    
+ ### - Created CloudWatch Alarm :
+  - Threshold: IAMPolicyChangeCount >= 1 in 5 minutes
+   - Notification: SNS topic security-alerts
+   -  Verification: Alarm exists, awaiting first IAM policy change event
+
+### 📌 What this does
+Triggers when IAM policies or role attachments are modified.  <br/> 
+
+<img width="1314" height="565" alt="image" src="https://github.com/user-attachments/assets/fb006fe8-1b9a-48d1-b185-bff2ea727554" />
+
+
+### 🔍 Safe Test for Detection Rule 3 (IAM Policy Changes)
+
+🎯 Objective
+ -  Verify that metric filter IAMPolicyChangeCount increments
+ -  Verify that IAMPolicyChangeAlarm triggers
+ -  Verify SNS notification is sent to security-alerts
+
+
+_i used the user with the ReadOnly plocies attached in other to carry out this test_
+
+   #### Confirmd Metric increment ✅
 
