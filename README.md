@@ -174,7 +174,7 @@ Any root activity may indicate:
 
 A CloudWatch metric filter was created on CloudTrail logs to detect any usage of the AWS root account. When a root activity event is logged, a CloudWatch alarm is triggered and sends a notification via Amazon SNS. This detection is categorized as high severity due to the unrestricted privileges associated with the root account.
 
-_🔹step(1)_
+_🔹step (1)_
 Created a Metric Filter
 <br/>
 
@@ -183,7 +183,7 @@ Created a Metric Filter
 <img width="1348" height="633" alt="image" src="https://github.com/user-attachments/assets/c3565431-f382-4caf-901c-9c974c16c0d6" /> <br/>
 
 
-_🔹step(2)_
+_🔹step (2)_
 
 ### SNS Setup for RootAccountUsageAlarm
 - Created SNS topic: security-alerts
@@ -204,7 +204,7 @@ _confirmation email for the subscription_
 
 
   
-_🔹step(3)_
+_🔹step (3)_
 
  ### Created an Alarm
 
@@ -225,7 +225,7 @@ Trigger the CloudWatch alarm without performing any dangerous root-level changes
  -  Alarm enters ALARM state
  - SNS email notification is sent
 
-_🔹step(1)_
+_🔹step (1)_
 I signed in into the root user and performed a read only root activity(signed in and accessed the Billing Dashboard) This will trigger the rules and filter will set earlier. 
 
 ### ✅ Alarm Confirmation-1– CloudWatch Confirmed Alert Triggered.
@@ -243,7 +243,7 @@ I signed in into the root user and performed a read only root activity(signed in
 🎯 Objective:
 Detect unauthorized AWS API calls using CloudTrail logs.
 
-_🔹step(1)_   
+_🔹step (1)_   
 
  - Created metric filter
  -  Filter pattern: { $.errorCode = "AccessDenied" }
@@ -256,7 +256,7 @@ _🔹step(1)_
 
 
  
- _🔹step(2)_
+ _🔹step (2)_
  
  -  Created CloudWatch alarm for the filter  i made.
    - Threshold: AccessDeniedCount >= 3 in 5 minutes  (Access denied 3 times in 5 minues) 
@@ -277,7 +277,7 @@ it detects and alert on unauthorized API activity using CloudTrail, CloudWatch L
 - Confirm Alarm State
 - Confirm Eamil Notification
 
-_🔹step(1)_   
+_🔹step (1)_   
   Generated Acess-Denied Event by trying to lunch services i am not allowed to use. 
   Note: I created a new IAM user and attached on ReadOnly permission in other to simulate this event trigger.
 
@@ -318,13 +318,14 @@ Attackers often escalate privileges by attaching policies or modifying roles, De
   ($.eventName = "AttachRolePolicy") ||
   ($.eventName = "PutUserPolicy") ||
   ($.eventName = "PutRolePolicy") }
+  
   - Metric namespace: SecurityDetections
-  - Metric name: IAMPolicyChangeCount
+ - Metric name: IAMPolicyChangeCount
  
     <img width="1351" height="652" alt="image" src="https://github.com/user-attachments/assets/0cd874cd-4040-42c5-9d0d-68ca990982ce" />
 
  
-     _🔹step(2)_
+     _🔹step (2)_
     
  ### - Created CloudWatch Alarm :
   - Threshold: IAMPolicyChangeCount >= 1 in 5 minutes
@@ -345,7 +346,32 @@ Triggers when IAM policies or role attachments are modified.  <br/>
  -  Verify SNS notification is sent to security-alerts
 
 
-_i used the user with the ReadOnly plocies attached in other to carry out this test_
+_i used the user with the ReadOnly plocies attached to carry out this test_
+
+### 📌 What i did:
+  _I Created AWS IAM JSON policy that allows a user to see the list of IAM users but prevents attaching or changing any policies_
+
+<img width="1337" height="567" alt="image" src="https://github.com/user-attachments/assets/30bb807e-67b6-41ff-a214-6b73dbbe7e9c" />
+
+ <img width="1252" height="576" alt="image" src="https://github.com/user-attachments/assets/2b4c8ac0-f657-4eb0-aa1a-e652d05fdbef" />
+
+_Now the test user can see the list of user_
+
+<img width="1347" height="632" alt="image" src="https://github.com/user-attachments/assets/7ab40376-0cec-4206-98d0-ca9b90370e35" />
 
    #### Confirmd Metric increment ✅
+
+   <img width="1343" height="550" alt="image" src="https://github.com/user-attachments/assets/79b3e2cf-4eb6-4ebd-aabc-66bce3d7663d" />
+
+
+### Confirmed Alarm Triggered ✅
+<img width="972" height="609" alt="image" src="https://github.com/user-attachments/assets/fccb123c-22f6-4af0-b2d6-e59183e0b9f5" />
+
+
+
+### Confirmed SNS Notification  ✅
+<img width="707" height="1280" alt="image" src="https://github.com/user-attachments/assets/e204fab8-ec5f-4c94-98f2-fc32f4feb5e2" />
+
+
+#### Successfully detected potential privilege escalation attempts ✅
 
