@@ -166,7 +166,7 @@ Detect any use of the AWS root account and generate an alert.
 The root account has full administrative privileges.
 Best practice is that it should never be used for daily operations.
 Any root activity may indicate:
-- Account compromis
+- Account compromise
 - Misconfiguration
 - Emergency access
 
