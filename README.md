@@ -17,7 +17,7 @@
 The detection platform uses AWS native services to collect, analyze, and alert on security-relevant events. CloudTrail captures all API activity and stores logs in Amazon S3 for long-term retention while simultaneously streaming events to CloudWatch Logs for near real-time analysis. CloudWatch metric filters and GuardDuty findings are used to detect suspicious behavior and trigger alerts via Amazon SNS.
 
 ### 📘 Table of Contents
- 1. Project Overview   - [Step-by-Step Implementation](#step-by-step-implementation) 
+ 1. Project Overview  
  2. Detection Goals
  3. Architecture Overview
  4. Implementation
@@ -36,10 +36,8 @@ The detection platform uses AWS native services to collect, analyze, and alert o
 
 The purpose of this detection platform is to identify and alert on high-risk security events within the AWS environment. The following detection goals were defined before implementing logging and monitoring controls:
 
-1     - [Root Account   ](detection-rule-1-root-account-usage) 
-
-
-
+[Root Account Usage ](#-implementation---detection-rule-1-root-account-usage)
+  
 2. IAM Privilege Escalation
 
 3. Unauthorized API Calls
