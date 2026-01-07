@@ -74,7 +74,7 @@ Detection is useless if the account itself is insecure.
 <img width="1350" height="637" alt="image" src="https://github.com/user-attachments/assets/f9e9f6ab-7db3-4202-8d30-ddb4faa2bad2" />
 
 
-## 🗄️  Implementation – Secure S3 Log Storage (Foundation Step)
+## 🗄️  Implementation  Step 1– Secure S3 Log Storage (Foundation Step)
 
 🎯 Objective
 
@@ -96,7 +96,7 @@ https://github.com/user-attachments/assets/21a5c026-ba51-45d3-8bdd-a7e637847e3c
 
 
 
-## 🏗️ Implementation – Step 1: CloudTrail (All Regions)
+## 🏗️ Implementation – Step 2: CloudTrail (All Regions)
 
 🎯 Objective
 
@@ -130,7 +130,7 @@ _🔹Cloudtrail Created_
 
 
 
-## 🔄 Implementation – Step 2:  CloudWatch Logs Integration
+## 🔄 Implementation – Step 3:  CloudWatch Logs Integration
 
 🎯 Objective
 Stream CloudTrail logs into CloudWatch Logs to enable near real-time security detection and alerting.
@@ -154,7 +154,7 @@ https://screenrec.com/share/ayufk59jTE
 
 <img width="1342" height="618" alt="image" src="https://github.com/user-attachments/assets/ab354300-c878-43ad-8b59-d8bad23654e9" /> <br/>
 
-## 🔍 Implementation – Step 3: Detection Rule 1: Root Account Usage
+## 🔍 Implementation – Step 4: Detection Rule 1: Root Account Usage
 
 🎯 Objective
 
@@ -186,8 +186,8 @@ Created a Metric Filter
 _🔹step(2)_
 
 ### SNS Setup for RootAccountUsageAlarm
-- Create SNS topic: security-alerts
--  Add subscription (Email) and confirm subscription
+- Created SNS topic: security-alerts
+-  Added subscription (Email) and confirm subscription
 
  
  
@@ -216,7 +216,7 @@ _🔹step(3)_
 <img width="1554" height="737" alt="image" src="https://github.com/user-attachments/assets/63a92464-23b7-482d-99b9-6a0d4e3243aa" />
 
 
-### 🔍 Safe Test for Detection Rule: Root Account Usage
+###  Safe Test for Detection Rule: Root Account Usage
 
 🎯 Objective
 
@@ -238,7 +238,35 @@ I signed in into the root user and performed a read only root activity(signed in
 
 
 
+## 🔍 Implementation Step 5, Detection Rule 2: Unauthorized API Calls (AccessDenied)
+
+🎯 Objective:
+Detect unauthorized AWS API calls using CloudTrail logs.
+
+_🔹step(1)_
+
+ - Created metric filter
+ -  Filter pattern: { $.errorCode = "AccessDenied" }
+ -  Metric namespace: SecurityDetection
+ -  Metric name: AccessDeniedCount
+ -   Metric value: 1
+<img width="1345" height="662" alt="image" src="https://github.com/user-attachments/assets/3645a63d-d56d-43c8-861a-61bd17ed6486" />
+
+<img width="582" height="665" alt="image" src="https://github.com/user-attachments/assets/646c6219-1cd4-44a2-bc7c-25410d798d9c" />
 
 
 
-<img width="1348" height="585" alt="image" src="https://github.com/user-attachments/assets/e1ee97b3-f3b6-420a-94ef-09e0bbd24c2c" />
+
+ 
+ _🔹step(2)_
+ -  Created CloudWatch alarm for the filter we i made.
+   - Threshold: AccessDeniedCount >= 3 in 5 minutes  (Access denied 3 times in 5 minues) 
+   - Notification: SNS topic security-alerts
+
+### 📌 What this does
+it detect and alert on unauthorized API activity using CloudTrail, CloudWatch Logs, and SNS. <br/> 
+
+<img width="1350" height="675" alt="image" src="https://github.com/user-attachments/assets/109959cf-59f9-4d3c-8873-0d6f80908273" />
+<img width="1352" height="567" alt="image" src="https://github.com/user-attachments/assets/7218121f-5f92-4cc6-b2e0-5a972dfb4d87" />
+
+
