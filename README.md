@@ -9,43 +9,37 @@
 
 </p>
 
-
-
-
 ## Project Overview
 
 The detection platform uses AWS native services to collect, analyze, and alert on security-relevant events. CloudTrail captures all API activity and stores logs in Amazon S3 for long-term retention while simultaneously streaming events to CloudWatch Logs for near real-time analysis. CloudWatch metric filters and GuardDuty findings are used to detect suspicious behavior and trigger alerts via Amazon SNS.
 
+<img width="1280" height="853" alt="image" src="https://github.com/user-attachments/assets/f40926e3-0e1a-4dee-b1cf-9f6afa022ba7" />
+
+
 ### 📘 Table of Contents
- 1. Project Overview  
- 2. Detection Goals
- 3. Architecture Overview
- 4. Implementation
- - CloudTrail Configuration
-- Log Storage (S3)
-- Detection Rules (CloudWatch)
-- GuardDuty Integration
-- Alerting & Notifications
- 5. Detection Use Cases
- 6. Testing & Validation
- 7. Lessons Learned 
+[ Architecture Overview ](#%EF%B8%8F-architecture-overview)
+
+[ Log Storage (S3) ](#%EF%B8%8F--implementation---secure-s3-log-storage-foundation-step)  
+
+[CloudTrail Configuration ](#%EF%B8%8F-implementation---cloudtrail-all-regions) 
+
+ [ Detection Rule 1: Root Account Usage ](#-implementation---detection-rule-1-root-account-usage)
+ 
+ [ Detection Rule 2: Unauthorized API Calls ](#-implementation---detection-rule-2-unauthorized-api-calls-accessdenied)    
+ 
+ [ Detection Rule 3: IAM Policy Changes (Privilege Escalation) ](#-implementation---detection-rule-3-iam-policy-changes-privilege-escalation)   
+ 
+ [ Detection Rule 4: Security Group Changes ](#-implementation---detection-rule-4-security-group-changes)  
+ 
+ [ Detection Rule 5: GuardDuty Integration](#--implementation---detection-rule-5-guardduty-integration)  
+
+
+ 
 
 
 
- ## 🔹 Detection Goals
 
-The purpose of this detection platform is to identify and alert on high-risk security events within the AWS environment. The following detection goals were defined before implementing logging and monitoring controls:
-
-[Root Account Usage ](#-implementation---detection-rule-1-root-account-usage)
   
-2. IAM Privilege Escalation
-
-3. Unauthorized API Calls
-
-4. Sensitive Data Access (S3)
-
-5. Known Malicious Activity
-
 
 
 ## 🏗️ Architecture Overview
